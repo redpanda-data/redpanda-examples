@@ -11,7 +11,7 @@ For more information on the schema registry please read Ben Pope's excellent blo
 
 ## Data
 
-The data used in this example is histroic weather station data provided by the [UK's Met Office](https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data) under their open data policy. Data is in plain text format and includes monthly aggregations for:
+The data used in this example is historic weather station recordings provided by the [UK's Met Office](https://www.metoffice.gov.uk/research/climate/maps-and-data/historic-station-data) under their open data policy. The data is provided in plain text and includes monthly aggregations for:
 
 * Mean daily maximum temperature (tmax)
 * Mean daily minimum temperature (tmin)
