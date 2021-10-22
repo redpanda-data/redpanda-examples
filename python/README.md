@@ -19,7 +19,7 @@ The data used in this example is historic weather station recordings provided by
 * Total rainfall (rain)
 * Total sunshine duration (sun)
 
-See [weather.avsc](../data/weather.avsc) the corresponding Avro schema.
+See [weather.avsc](../data/weather.avsc) for the corresponding Avro schema.
 
 ## Setup
 
