@@ -10,7 +10,7 @@ object ConsumerExample extends App {
         println("Usage: ConsumerExample config topic")
     }
 
-    // Load producer configuration from properties file, which must 
+    // Load consumer configuration from properties file, which must 
     // include `bootstrap.servers` as a minimum.
     val props = new Properties()
     props.load(new FileReader(args(0)))
