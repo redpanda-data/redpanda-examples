@@ -1,6 +1,16 @@
+.DS_store
+.vscode/
+.env
+env/
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 
-.env
-env/
+# Scala
+.bloop/
+.bsp/
+.metals/
+project/
+target/
