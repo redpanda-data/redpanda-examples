@@ -12,5 +12,7 @@ __pycache__/
 .bloop/
 .bsp/
 .metals/
-project/
 target/
+project/project/
+build.properties
+metals.sbt
