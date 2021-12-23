@@ -3,9 +3,14 @@
 
 ## Build
 
+Prerequisites:
+* [Scala v2.12](https://www.scala-lang.org/download/2.12.15.html)
+* [sbt v1.5.7](https://www.scala-sbt.org/download.html)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
 ```
 $ git clone https://github.com/vectorizedio/redpanda-examples.git
-$ cd redpanda-examples/scala
+$ cd redpanda-examples/spark/scala
 $ sbt clean assembly
 $ ls target/scala-2.12/redpanda-examples-assembly-1.0.0.jar
 ```
@@ -19,10 +24,10 @@ Demonstrates how to read from and write to Redpanda with Spark Streaming:
 
 ### Create Local Environment
 
-Use [Docker Compose](../docker-compose/redpanda-spark.yml) to create a local environment with three containers: Spark Master, Spark Worker, and Redpanda Broker.
+Use [Docker Compose](../redpanda-spark.yml) to create a local environment with three containers: Spark Master, Spark Worker, and Redpanda Broker.
 
 ```
-$ cd redpanda-examples/docker-compose
+$ cd redpanda-examples/spark
 $ docker-compose -f redpanda-spark.yml up -d
 [+] Running 4/4
  ⠿ Network docker-compose_redpanda_network  Created 
@@ -44,6 +49,7 @@ The [ProducerExample](./src/main/scala/com/redpanda/examples/clients/ProducerExa
 Run the Producer with `sbt` or `scala`, passing the producer configuration (must include `bootstrap.servers`) and topic name as arguments:
 
 ```
+$ cd redpanda-examples/spark/scala
 $ sbt "run redpanda.config spx_history"
 Multiple main classes detected. Select one to run:
  [1] com.redpanda.examples.clients.ConsumerExample
@@ -62,7 +68,7 @@ The Streaming application [RedpandaSparkStream](./src/main/scala/com/redpanda/ex
 To avoid having to install Spark on your local machine, the easiest way to run the application is to spin up another Docker container with the necessary libraries already installed. To make it even easier, bind mount the local directoy on the container for easy access to the target `.jar` file:
 
 ```
-$ docker run --rm -it --user=root -e SPARK_MASTER="spark://spark-master:7077" -v `pwd`:/project --network docker-compose_redpanda_network docker.io/bitnami/spark:3 /bin/bash
+$ docker run --rm -it --user=root -e SPARK_MASTER="spark://spark-master:7077" -v `pwd`:/project --network spark_redpanda_network -p 4040:4040 docker.io/bitnami/spark:3 /bin/bash
 
 # spark-submit --master $SPARK_MASTER --class com.redpanda.examples.spark.RedpandaSparkStream /project/target/scala-2.12/redpanda-examples-assembly-1.0.0.jar 172.24.1.4:9092 spx_history spx_history_diff
 ```
