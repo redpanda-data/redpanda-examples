@@ -19,7 +19,7 @@ The data used in this example is historic weather station recordings provided by
 * Total rainfall (rain)
 * Total sunshine duration (sun)
 
-See [weather.avsc](../data/weather.avsc) for the corresponding Avro schema.
+See [weather.avsc](data/weather.avsc) for the corresponding Avro schema.
 
 ## Setup
 
@@ -72,8 +72,8 @@ options:
 
 Using the example addresses from above, running `python3 redpanda_schema_example.py 127.0.0.1:49648 http://127.0.0.1:49650` will do the following:
 
-1. Post the Avro schema [weather.avsc](../data/weather.avsc) to the Redpanda schema registry
-2. Read the data file [hurndata.txt](../data/hurndata.txt) and send the messages to Redpanda. The producer is configured to serialize the messages into Avro using `value_serializer`
+1. Post the Avro schema [weather.avsc](data/weather.avsc) to the Redpanda schema registry
+2. Read the data file [hurndata.txt](data/hurndata.txt) and send the messages to Redpanda. The producer is configured to serialize the messages into Avro using `value_serializer`
 3. Retrieve the Avro schema from the Redpanda schema registry
 4. Consume the messages from Redpanda and deserialize them into JSON using the Avro schema in `value_deserializer`
 

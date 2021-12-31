@@ -17,7 +17,7 @@ parser.add_argument('-t', '--topic', default='station-data', help='Name of topic
 args = parser.parse_args()
 
 # Publish the schema
-with open('../data/weather.avsc') as f:
+with open('data/weather.avsc') as f:
     schema = parse(f.read())
 
 header = [field['name'] for field in schema.to_json()['fields']]
@@ -29,7 +29,7 @@ id = registry.publish(schema.to_json())
 print(f'Schema id: {id}')
 
 # Send messages to Redpanda
-with open('../data/hurndata.txt') as f:
+with open('data/hurndata.txt') as f:
     data = f.readlines()[7:]
 
 def as_avro(value):    
