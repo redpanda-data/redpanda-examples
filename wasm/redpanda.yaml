@@ -1,0 +1,75 @@
+config_file: /etc/redpanda/redpanda.yaml
+pandaproxy:
+  advertised_pandaproxy_api:
+  - address: 172.24.1.2
+    name: internal
+    port: 8082
+  - address: 127.0.0.1
+    name: external
+    port: 18082
+  pandaproxy_api:
+  - address: 0.0.0.0
+    name: internal
+    port: 8082
+  - address: 172.24.1.2
+    name: external
+    port: 18082
+redpanda:
+  admin:
+  - address: 0.0.0.0
+    port: 9644
+  advertised_kafka_api:
+  - address: 172.24.1.2
+    name: internal
+    port: 9092
+  - address: 127.0.0.1
+    name: external
+    port: 19092
+  advertised_rpc_api:
+    address: 172.24.1.2
+    port: 33145
+  auto_create_topics_enabled: true
+  coproc_max_batch_size: 32768
+  coproc_max_inflight_bytes: 10485760
+  coproc_max_ingest_bytes: 655360
+  coproc_offset_flush_interval_ms: 300000
+  coproc_supervisor_server:
+    address: 0.0.0.0
+    port: 43189
+  data_directory: /var/lib/redpanda/data
+  developer_mode: true
+  enable_coproc: true
+  kafka_api:
+  - address: 0.0.0.0
+    name: internal
+    port: 9092
+  - address: 172.24.1.2
+    name: external
+    port: 19092
+  node_id: 0
+  rpc_server:
+    address: 172.24.1.2
+    port: 33145
+  seed_servers: []
+rpk:
+  coredump_dir: /var/lib/redpanda/coredump
+  enable_memory_locking: false
+  enable_usage_stats: false
+  overprovisioned: true
+  tune_aio_events: false
+  tune_ballast_file: false
+  tune_clocksource: false
+  tune_coredump: false
+  tune_cpu: false
+  tune_disk_irq: false
+  tune_disk_nomerges: false
+  tune_disk_scheduler: false
+  tune_disk_write_cache: false
+  tune_fstrim: false
+  tune_network: false
+  tune_swappiness: false
+  tune_transparent_hugepages: false
+schema_registry:
+  schema_registry_api:
+  - address: 172.24.1.2
+    port: 8081

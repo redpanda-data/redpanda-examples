@@ -1,0 +1,28 @@
+networks:
+  redpanda_network:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.24.1.0/24
+        gateway: 172.24.1.1
+services:
+  redpanda:
+    command:
+      - redpanda
+      - start
+      - --node-id 0
+      - --smp 1
+      - --memory 1G
+      - --overprovisioned
+    image: docker.vectorized.io/vectorized/redpanda:v21.11.3-si-beta5
+    container_name: redpanda
+    networks:
+      redpanda_network:
+        ipv4_address: 172.24.1.2
+    volumes:
+      - ./redpanda.yaml:/etc/redpanda/redpanda.yaml
+    ports:
+      - 18081:8081  # Schema registry port
+      - 18082:18082 # Pandaproxy port
+      - 19092:19092 # Kafka API port
+      - 19644:9644  # Prometheus and HTTP admin port

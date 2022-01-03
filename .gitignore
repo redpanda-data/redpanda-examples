@@ -16,3 +16,8 @@ target/
 project/project/
 build.properties
 metals.sbt
+
+# Javascript
+dist/
+node_modules/
+package-lock.json
