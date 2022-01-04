@@ -28,7 +28,7 @@ object RedpandaSparkStream extends App {
 
     val marketActivity = StructType(List(
         StructField("Date", StringType, true),
-        StructField("Close/Last", StringType, true),
+        StructField("CloseLast", StringType, true),
         StructField("Volume", StringType, true),
         StructField("Open", StringType, true),
         StructField("High", StringType, true),
