@@ -1,0 +1,243 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+*.app
+/*build*
+/dbuild
+bin
+_e2e_artifacts/
+_helm_e2e_artifacts/
+/src/go/k8s/testbin/*
+/src/go/k8s/cm-verifier
+
+# Test binary, build with `go test -c`
+*.test
+
+# bazel
+bazel-*
+
+# Vagrant
+.vagrant/
+
+.gdb_history
+*_generated.h
+build_debug/
+build_release/
+
+.DS_Store
+
+# clang-tidy
+compile_commands.json
+
+# vim
+.*.sw?
+
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CTestTestfile.cmake
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+
+src/demo_apps/demo_client
+src/demo_apps/demo_server
+
+# tests
+src/integration_tests/*_test
+src/test/*_unit_test
+
+# docs
+Doxyfile
+
+# python (build system runner)
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+/build/
+/depot_tools
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+docs.md
+src/consistency-testing/gobekli/build
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+.static_storage/
+.media/
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.ycm_extra_conf.py
+
+.vscode/
+.cooking_memory
+.idea
+tags
+.ccls-cache
+.clangd
+
+# Configuration
+*.bk
+
+# metrics API
+src/go/metrics/env.yaml
+
+# Infra
+infra/modules/**/ssh_config*
+*tfstate*
+.vtools.db
+
+# VSCode Java
+.project
+
+# Node js dev dependencies
+src/js/node_modules
+# ts generated for coprocessor serializables
+src/js/modules/domain/generatedRpc/*.ts
+# rpc generated for coprocessor
+src/js/modules/rpc/serverAndClients/*.ts
+# vectorized public dependency
+src/js/public
+
+# rpk build dirs
+src/go/rpk/linux*
+src/go/rpk/darwin*
+
+#intelij
+*.iml
+# Node dependecies ts-generated
+tools/ts-generator/node_modules
+# ducktape
+results
+.ducktape
+tests/docker/build
+vbuild/
+
+/.vtools.yml
+/vtools
+/Taskfile.yml
+/.dockerignore
+
+# helm chart dependencies
+*.tgz
+
+# VSCode java settings
+.classpath
+.factorypath
+.settings/

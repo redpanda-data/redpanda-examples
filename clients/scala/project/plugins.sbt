@@ -1,0 +1,1 @@
+addSbtPlugin("com.github.sbt" % "sbt-protobuf" % "0.7.1")

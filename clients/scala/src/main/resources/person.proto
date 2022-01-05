@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+option java_package = "io.vectorized";
+option java_outer_classname = "Person";
+option optimize_for = SPEED;
+
+message PersonMessage {
+  string firstName = 1;
+  string lastName = 2;
+  int64 birthDate = 3;
+  optional string city = 4;
+  optional string ipAddress = 5;
+}

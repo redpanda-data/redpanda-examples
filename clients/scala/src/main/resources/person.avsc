@@ -1,0 +1,27 @@
+{
+  "type": "record",
+  "name": "Person",
+  "namespace": "io.vectorized.examples",
+  "fields": [
+    {
+      "name": "firstName",
+      "type": "string"
+    },
+    {
+      "name": "lastName",
+      "type": "string"
+    },
+    {
+      "name": "birthDate",
+      "type": "long"
+    },
+    {
+      "name": "city",
+      "type": "string"
+    },
+    {
+      "name": "ipAddress",
+      "type": "string"
+    }
+  ]
+}
