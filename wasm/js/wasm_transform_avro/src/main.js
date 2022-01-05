@@ -2,15 +2,25 @@ const avro = require("avro-js");
 const {
   SimpleTransform,
   PolicyError,
-  PolicyInjection
+  PolicyInjection,
+  calculateRecordBatchSize
 } = require("@vectorizedio/wasm-api");
 
 const transform = new SimpleTransform();
 
-/* Topics that fire the transform function */
-transform.subscribe([["market_activity", PolicyInjection.Stored]]);
+/**
+ * Topics that fire the transform function
+ * - Earliest
+ * - Stored
+ * - Latest
+ */
+transform.subscribe([["market_activity", PolicyInjection.Latest]]);
 
-/* The strategy the transform engine will use when handling errors */
+/**
+ * The strategy the transform engine will use when handling errors
+ * - SkipOnFailure
+ * - Deregister
+ */
 transform.errorHandler(PolicyError.SkipOnFailure);
 
 /* TODO: Fetch Avro schema from repository */
@@ -28,25 +38,34 @@ const schema = avro.parse({
 });
 
 /* Auxiliar transform function for records */
-const toAvro = (record) => {
-  const obj = JSON.parse(record.value);
-  const newRecord = {
-    ...record,
-    value: schema.toBuffer(obj),
-  };
-  return newRecord;
+const toAvro = (record, logger) => {
+  try {
+    const obj = JSON.parse(record.value);
+    const newRecord = {
+      ...record,
+      value: schema.toBuffer(obj),
+    };
+    return newRecord;
+  } catch(e) {
+    logger.error(`${e}: ${record.value}`);
+    throw(e);
+  }
 }
 
 /* Transform function */
-transform.processRecord((recordBatch) => {
+transform.processRecord((recordBatch, logger) => {
   const result = new Map();
   const transformedRecord = recordBatch.map(({ header, records }) => {
+    const newRecords = records.map(
+      function(r) { return toAvro(r, logger); }
+    );
     return {
       header,
-      records: records.map(toAvro),
+      records: newRecords,
     };
   });
   result.set("result", transformedRecord);
+  // processRecord function returns a Promise
   return Promise.resolve(result);
 });
 

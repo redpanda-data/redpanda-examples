@@ -20,7 +20,7 @@ npm run build
 rpk topic create market_activity --brokers localhost:19092
 rpk topic list --brokers localhost:19092
 
-rpk wasm deploy dist/main.js --name wasm_transform_avro --description "Transforms JSON to AVRO" --brokers localhost:19092
+rpk wasm deploy dist/main.js --name avro --description "Transforms JSON to AVRO" --brokers localhost:19092
 
 ## Produce JSON Records and Consume AVRO Results
 
@@ -34,3 +34,7 @@ node producer.js --brokers localhost:19092
 
 docker exec --user root -it redpanda /bin/bash
 tail -100f /var/lib/redpanda/coprocessor/logs/wasm
+
+## Remove Coproc
+
+rpk wasm remove avro --brokers localhost:19092
