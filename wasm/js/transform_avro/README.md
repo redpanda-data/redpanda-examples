@@ -66,5 +66,5 @@ tail -100f /var/lib/redpanda/coprocessor/logs/wasm
 ## Remove Coproc
 
 ```bash
-rpk wasm remove avro --brokers localhost:19092
+rpk wasm remove json2avro --brokers localhost:19092
 ```
