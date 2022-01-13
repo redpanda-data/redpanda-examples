@@ -1,0 +1,3 @@
+[submodule "integrations/deephaven/redpanda-docker-stats"]
+	path = integrations/deephaven/redpanda-docker-stats
+	url = https://github.com/deephaven-examples/redpanda-docker-stats
