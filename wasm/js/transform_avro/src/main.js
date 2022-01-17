@@ -38,30 +38,22 @@ const schema = avro.parse({
 });
 
 /* Auxiliar transform function for records */
-const toAvro = (record, logger) => {
-  try {
-    const obj = JSON.parse(record.value);
-    const newRecord = {
-      ...record,
-      value: schema.toBuffer(obj),
-    };
-    return newRecord;
-  } catch(e) {
-    logger.error(`${e}: ${record.value}`);
-    throw(e);
-  }
+const toAvro = (record) => {  
+  const obj = JSON.parse(record.value);
+  const newRecord = {
+    ...record,
+    value: schema.toBuffer(obj),
+  };
+  return newRecord;  
 }
 
 /* Transform function */
-transform.processRecord((recordBatch, logger) => {
+transform.processRecord((recordBatch) => {
   const result = new Map();
   const transformedRecord = recordBatch.map(({ header, records }) => {
-    const newRecords = records.map(
-      function(r) { return toAvro(r, logger); }
-    );
     return {
       header,
-      records: newRecords,
+      records: records.map(toAvro),
     };
   });
   result.set("result", transformedRecord);
