@@ -1,6 +1,10 @@
 # Redpanda Examples in Scala
 [![Slack](https://img.shields.io/badge/Slack-Redpanda%20Community-blue)](https://vectorized.io/slack)
 
+## Blog
+
+https://redpanda.com/blog/buildling-streaming-application-docker-spark-redpanda/
+
 ## Build
 
 Prerequisites:
