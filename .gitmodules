@@ -1,0 +1,6 @@
+[submodule "integrations/deephaven/redpanda-dxfeed-financial-data"]
+	path = integrations/deephaven/redpanda-dxfeed-financial-data
+	url = https://github.com/deephaven-examples/redpanda-dxfeed-financial-data
+[submodule "integrations/deephaven/redpanda-docker-stats"]
+	path = integrations/deephaven/redpanda-docker-stats
+	url = https://github.com/deephaven-examples/redpanda-docker-stats
