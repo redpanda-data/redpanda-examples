@@ -5,9 +5,9 @@
 A collection of examples to demonstrate how to interact with Redpanda from various clients and languages. Redpanda is Kafka API compatible. Any client that works with Kafka will work, but we have tested the ones listed [here](https://vectorized.io/docs/faq#What-clients-do-you-recommend-to-use-with-Redpanda).
 
 
-## Integrations
+## Partner Integrations
 
-Redpanda is easy to use, flexible, and efficient.  Below is a small sampling of some of our partner integrations.
+Below is a sample of some of our partner integrations.
 
 ### [Deephaven](https://deephaven.io/)
 
