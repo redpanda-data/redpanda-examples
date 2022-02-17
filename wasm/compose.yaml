@@ -14,7 +14,7 @@ services:
       - --smp 1
       - --memory 1G
       - --overprovisioned
-    image: docker.vectorized.io/vectorized/redpanda:v21.11.3-si-beta5
+    image: docker.vectorized.io/vectorized/redpanda:v21.12.1-wasm-beta1-arm64
     container_name: redpanda
     networks:
       redpanda_network:
