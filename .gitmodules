@@ -1,3 +1,6 @@
+[submodule "deephaven-debezium-demo"]
+	path = partners/deephaven/deephaven-debezium-demo
+	url = https://github.com/deephaven-examples/deephaven-debezium-demo
 [submodule "redpanda-dxfeed-financial-data"]
 	path = partners/deephaven/redpanda-dxfeed-financial-data
 	url = https://github.com/deephaven-examples/redpanda-dxfeed-financial-data

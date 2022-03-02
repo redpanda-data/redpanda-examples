@@ -13,6 +13,11 @@ Below is a sample of some of our partner integrations.
 
 Open-core query engine for building apps and analytics with real-time streams and batch data.  
 
+#### Redpanda + Deephaven Demo
+
+The demo follows closely the one defined for [Materialize](https://github.com/MaterializeInc/ecommerce-demo/blob/main/README_RPM.md). We want to showcase how you can accomplish the same workflow in [Deephaven](https://github.com/deephaven-examples/deephaven-debezium-demo), with Deephaven's query engine and Redpanda's streaming capabilities.
+
+
 #### Docker-stats
 
 Need to monitor your local machine in real time?  This example publishes your `docker stats` to Redpanda.  Written in Python, this is an out-of-the box solution to see when your Docker containers over-use their resources. See full example here: [deephaven-examples/redpanda-docker-stats](https://github.com/deephaven-examples/redpanda-docker-stats).
