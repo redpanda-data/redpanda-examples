@@ -1,4 +1,4 @@
-const avro = require("avro-js");
+const avro = require("avsc");
 const {
   SimpleTransform,
   PolicyError,
@@ -24,7 +24,7 @@ transform.subscribe([["market_activity", PolicyInjection.Latest]]);
 transform.errorHandler(PolicyError.SkipOnFailure);
 
 /* TODO: Fetch Avro schema from repository */
-const schema = avro.parse({
+const avroType = avro.Type.forSchema({
   name: "market_activity",
   type: "record",
   fields: [
@@ -42,24 +42,24 @@ const toAvro = (record) => {
   const obj = JSON.parse(record.value);
   const newRecord = {
     ...record,
-    value: schema.toBuffer(obj),
+    value: avroType.toBuffer(obj),
   };
   return newRecord;  
 }
 
 /* Transform function */
-transform.processRecord((recordBatch) => {
+transform.processRecord((batch) => {
   const result = new Map();
-  const transformedRecord = recordBatch.map(({ header, records }) => {
+  const transformedBatch = batch.map(({ header, records }) => {
     return {
       header,
       records: records.map(toAvro),
     };
   });
-  result.set("result", transformedRecord);
+  result.set("avro", transformedBatch);
   // processRecord function returns a Promise
   return Promise.resolve(result);
 });
 
 exports["default"] = transform;
-exports["schema"] = schema;
+exports["schema"] = avroType;
