@@ -1,0 +1,12 @@
+{
+  "name": "market_activity",
+  "type": "record",
+  "fields": [
+    { "name": "Date", "type": "string" },
+    { "name": "CloseLast", "type": "string" },
+    { "name": "Volume", "type": "string" },
+    { "name": "Open", "type": "string" },
+    { "name": "High", "type": "string" },
+    { "name": "Low", "type": "string" }
+  ]
+}
