@@ -1,6 +1,20 @@
 # Redpanda Data Transforms: JSON to AVRO
 
-This example JavaScript transform uses the async engine to map JSON formatted messages to an AVRO schema using `avro-js`.
+This example JavaScript transform uses the async engine to map JSON formatted messages to an AVRO schema.
+
+# Tool versions
+
+Versions for tools used in this project are listed below.
+Other versions may work, but make sure to use the following versions if you run into issues:
+
+| Tool | Version | Notes |
+| - | - | - |
+| curl | 7.77.0 |
+| docker | v20.10.13 |
+| docker-compose | v1.29.2 |
+| jq | jq-1.6 |
+| node | v17.7.2 | node >= 11.15.0 has been verified |
+| rpk | v21.11.9 | rev ad9c5af53cc2ac68170d4a4d7c6e5f25c0d17f69 |
 
 ## Start Redpanda Container
 
@@ -27,36 +41,57 @@ npm test       # run mocha tests
 npm run build  # bundle js application with webpack 
 ```
 
-Create Redpanda topic:
+## Create the topic
+
+Create the topic where the producer app will send messages.
+This step is required since the consumed topic must exist prior to deploying the wasm coprocessor.
 
 ```bash
-rpk topic create market_activity --brokers localhost:19092
-rpk topic list --brokers localhost:19092
+> rpk topic create market_activity --brokers localhost:19092
+TOPIC            STATUS
+market_activity  OK
 ```
 
-Deploy the transform script to Redpanda:
+List all current topics:
+```bash
+> rpk topic list --brokers localhost:19092
+NAME             PARTITIONS  REPLICAS
+_schemas         1           1
+market_activity  1           1
+```
+
+The `_schemas` topic is automatically generated when the schemas are uploaded to the registry.
+
+## Deploy the transform script to Redpanda
 
 ```bash
-rpk wasm deploy dist/main.js --name json2avro --description "Transforms JSON to AVRO" --brokers localhost:19092
+> rpk wasm deploy dist/main.js --name json2avro --description "Transforms JSON to AVRO" --brokers localhost:19092
+Deploy successful!
 ```
 
 ## Produce JSON Records and Consume AVRO Results
 
-Start consumers:
+Start two consumers (run each command below in a separate terminal):
 
 ```bash
-rpk topic consume market_activity --brokers localhost:19092
-rpk topic consume market_activity._result_ --brokers localhost:19092
+> rpk topic consume market_activity --brokers localhost:19092
+> rpk topic consume market_activity._avro_ --brokers localhost:19092
 ```
 
-Start producer:
+The topic `market_activity._avro_` doesn't yet exist, but it will be automatically created once the wasm function begins consuming events from the topic `market_activity`.
+
+Start the producer (in a third terminal):
 
 ```bash
-cd redpanda-examples/clients/js
-node producer.js --brokers localhost:19092
+> cd redpanda-examples/clients/js
+> node producer.js --brokers localhost:19092
 ```
+
+The above command will output many lines of JSON string representations of the events being sent to topic `market_activity`.
 
 ## View Coproc Log
+
+The coprocessor log on the Redpanda container shows status information and possibly errors if something went wrong.
 
 ```bash
 docker exec --user root -it redpanda /bin/bash
@@ -64,6 +99,9 @@ tail -100f /var/lib/redpanda/coprocessor/logs/wasm
 ```
 
 ## Remove Coproc
+
+Occasionally you may want disable a deployed coprocessor, for instance when you want to deploy a new version of the transform.
+Run the following command (make sure to use the same name as your previous deploy step):
 
 ```bash
 rpk wasm remove json2avro --brokers localhost:19092
