@@ -3,6 +3,12 @@
 .env
 env/
 
+# TLS certificates and keys
+*.key
+*.crt
+*.p12
+*.jks
+
 # Python
 __pycache__/
 *.py[cod]
