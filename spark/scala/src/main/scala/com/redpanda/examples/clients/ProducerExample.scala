@@ -24,7 +24,7 @@ object ProducerExample extends App {
 
     // S&P 500 (SPX) historical market data downloaded from nasdaq.com:
     // https://www.nasdaq.com/market-activity/index/spx/historical
-    val input = Source.fromResource("spx_historical_data.csv").getLines
+    val input = Source.fromResource("market_activity.csv").getLines
     val header = input.take(1).next
     val headarr = header.split(",", -1)
     println(s"Header: $header")
