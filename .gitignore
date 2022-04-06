@@ -3,6 +3,9 @@
 .env
 env/
 
+# Sample datasets
+*.csv
+
 # TLS certificates and keys
 *.key
 *.crt
