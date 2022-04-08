@@ -22,7 +22,7 @@ services:
     volumes:
       - ./redpanda.yaml:/etc/redpanda/redpanda.yaml
     ports:
-      - 18081:8081  # Schema registry port
-      - 18082:18082 # Pandaproxy port
-      - 19092:19092 # Kafka API port
-      - 19644:9644  # Prometheus and HTTP admin port
+      - 8081:8081  # Schema registry port
+      - 8082:8082 # Pandaproxy port
+      - 9092:9092 # Kafka API port
+      - 9644:9644  # Prometheus and HTTP admin port

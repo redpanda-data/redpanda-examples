@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vectorizedio/wasm-api": ">=22.1.1-rc1",
+    "@vectorizedio/wasm-api": "21.12.1-wasm-beta1",
     "avsc": "^5.7.3"
   },
   "devDependencies": {

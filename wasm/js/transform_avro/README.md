@@ -47,14 +47,14 @@ Create the topic where the producer app will send messages.
 This step is required since the consumed topic must exist prior to deploying the wasm coprocessor.
 
 ```bash
-> rpk topic create market_activity --brokers localhost:19092
+> rpk topic create market_activity
 TOPIC            STATUS
 market_activity  OK
 ```
 
 List all current topics:
 ```bash
-> rpk topic list --brokers localhost:19092
+> rpk topic list
 NAME             PARTITIONS  REPLICAS
 _schemas         1           1
 market_activity  1           1
@@ -65,7 +65,7 @@ The `_schemas` topic is automatically generated when the schemas are uploaded to
 ## Deploy the transform script to Redpanda
 
 ```bash
-> rpk wasm deploy dist/main.js --name json2avro --description "Transforms JSON to AVRO" --brokers localhost:19092
+> rpk wasm deploy dist/main.js --name json2avro --description "Transforms JSON to AVRO"
 Deploy successful!
 ```
 
@@ -74,8 +74,8 @@ Deploy successful!
 Start two consumers (run each command below in a separate terminal):
 
 ```bash
-> rpk topic consume market_activity --brokers localhost:19092
-> rpk topic consume market_activity._avro_ --brokers localhost:19092
+> rpk topic consume market_activity
+> rpk topic consume market_activity._avro_
 ```
 
 The topic `market_activity._avro_` doesn't yet exist, but it will be automatically created once the wasm function begins consuming events from the topic `market_activity`.
@@ -84,7 +84,7 @@ Start the producer (in a third terminal):
 
 ```bash
 > cd redpanda-examples/clients/js
-> node producer.js --brokers localhost:19092
+> node producer.js --brokers localhost:9092
 ```
 
 The above command will output many lines of JSON string representations of the events being sent to topic `market_activity`.
@@ -104,5 +104,5 @@ Occasionally you may want disable a deployed coprocessor, for instance when you 
 Run the following command (make sure to use the same name as your previous deploy step):
 
 ```bash
-rpk wasm remove json2avro --brokers localhost:19092
+rpk wasm remove json2avro
 ```

@@ -3,17 +3,17 @@ pandaproxy:
   advertised_pandaproxy_api:
   - address: 172.24.1.2
     name: internal
-    port: 8082
+    port: 18082
   - address: 127.0.0.1
     name: external
-    port: 18082
+    port: 8082
   pandaproxy_api:
   - address: 0.0.0.0
     name: internal
-    port: 8082
+    port: 18082
   - address: 172.24.1.2
     name: external
-    port: 18082
+    port: 8082
 redpanda:
   admin:
   - address: 0.0.0.0
@@ -21,10 +21,10 @@ redpanda:
   advertised_kafka_api:
   - address: 172.24.1.2
     name: internal
-    port: 9092
+    port: 19092
   - address: 127.0.0.1
     name: external
-    port: 19092
+    port: 9092
   advertised_rpc_api:
     address: 172.24.1.2
     port: 33145
@@ -42,10 +42,10 @@ redpanda:
   kafka_api:
   - address: 0.0.0.0
     name: internal
-    port: 9092
+    port: 19092
   - address: 172.24.1.2
     name: external
-    port: 19092
+    port: 9092
   node_id: 0
   rpc_server:
     address: 172.24.1.2
