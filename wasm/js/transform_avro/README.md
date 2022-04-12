@@ -21,9 +21,7 @@ Other versions may work, but make sure to use the following versions if you run 
 To run the example locally, spin up a Redpanda node with Docker:
 
 ```bash
-cd redpanda-examples/wasm
-docker-compose up -d
-
+> docker-compose -f docker-compose/compose-wasm.yaml up -d
 [+] Running 2/2
  ⠿ Network redpanda_network  Created
  ⠿ Container redpanda        Started
@@ -34,11 +32,10 @@ docker-compose up -d
 Use `npm` to package up the JavaScript application:
 
 ```bash
-cd redpanda-examples/wasm/js/transform_avro
-
-npm install    # install js dependencies in node_modules
-npm test       # run mocha tests
-npm run build  # bundle js application with webpack 
+> cd wasm/js/transform_avro
+> npm install    # install js dependencies in node_modules
+> npm test       # run mocha tests
+> npm run build  # bundle js application with webpack
 ```
 
 ## Create the topic
@@ -83,20 +80,26 @@ The topic `market_activity._avro_` doesn't yet exist, but it will be automatical
 Start the producer (in a third terminal):
 
 ```bash
-> cd redpanda-examples/clients/js
-> node producer.js --brokers localhost:9092
+> cd clients/js
+> npm install
+> node producer.js -rd Date
 ```
 
 The above command will output many lines of JSON string representations of the events being sent to topic `market_activity`.
+
+Verify that you see output in the second terminal.
+This will be a string representation of the Avro-serialized events being sent to `market_activity._avro_`.
 
 ## View Coproc Log
 
 The coprocessor log on the Redpanda container shows status information and possibly errors if something went wrong.
 
 ```bash
-docker exec --user root -it redpanda /bin/bash
+> docker exec --user root -it redpanda /bin/bash
 tail -100f /var/lib/redpanda/coprocessor/logs/wasm
 ```
+
+# Cleanup
 
 ## Remove Coproc
 
@@ -104,5 +107,14 @@ Occasionally you may want disable a deployed coprocessor, for instance when you 
 Run the following command (make sure to use the same name as your previous deploy step):
 
 ```bash
-rpk wasm remove json2avro
+> rpk wasm remove json2avro
+```
+
+## Stop docker compose resources
+
+```bash
+> docker-compose -f docker-compose/compose-wasm.yaml down
+[+] Running 2/2
+ ⠿ Container redpanda                       Removed   0.3s
+ ⠿ Network docker-compose_redpanda_network  Removed   0.1s
 ```

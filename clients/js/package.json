@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "chalk": "^5.0.1",
     "csv-parser": "^3.0.0",

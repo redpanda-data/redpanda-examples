@@ -20,7 +20,7 @@ services:
       redpanda_network:
         ipv4_address: 172.24.1.2
     volumes:
-      - ./redpanda.yaml:/etc/redpanda/redpanda.yaml
+      - ./redpanda-wasm.yaml:/etc/redpanda/redpanda.yaml
     ports:
       - 8081:8081  # Schema registry port
       - 8082:8082 # Pandaproxy port
