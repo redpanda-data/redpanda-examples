@@ -7,7 +7,7 @@ This app provides scripts for various client tasks.
 ## Install dependencies
 
 ```bash
-npm i
+> npm i
 ```
 
 More details on each script and its associated tasks are below.
@@ -15,14 +15,13 @@ More details on each script and its associated tasks are below.
 ## Start Redpanda
 
 ```bash
-cd redpanda-examples/wasm
-docker-compose up -d
+> docker-compose -f docker-compose/compose-wasm.yaml up -d
 ```
 
 ## producer.js
 
-This script reads data from a csv file and sends this data to a topic.
+The following command prints the help menu:
 
 ```bash
-node producer.js --brokers localhost:9092
+> node producer.js -h
 ```
