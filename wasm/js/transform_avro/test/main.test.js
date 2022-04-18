@@ -19,8 +19,8 @@ describe("transform", function() {
   it("transforms json to avro", function() {
     return transform.default.apply(recordBatch).then(result => {
       assert.equal(result.size, 1);
-      assert(result.get("result"));
-      result.get("result").records.forEach(avroRecord => {
+      assert(result.get("avro"));
+      result.get("avro").records.forEach(avroRecord => {
         obj = transform.schema.fromBuffer(avroRecord.value);
         assert.equal(
           JSON.stringify(obj),

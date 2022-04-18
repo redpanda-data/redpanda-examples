@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message market_activity {
+  string Date = 1;
+  string CloseLast = 2;
+  string Volume = 3;
+  string Open = 4;
+  string High = 5;
+  string Low = 6;
+}

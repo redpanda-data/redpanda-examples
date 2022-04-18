@@ -3,21 +3,26 @@
   "version": "0.0.1",
   "description": "Transforms JSON to AVRO",
   "main": "bin/index.js",
-  "bin": { "iwt": "./bin/index.js" },
+  "bin": {
+    "iwt": "./bin/index.js"
+  },
   "scripts": {
     "build": "./webpack.js",
     "test": "node_modules/mocha/bin/mocha"
   },
-  "keywords": ["inline-wasm-transform", "redpanda"],
+  "keywords": [
+    "inline-wasm-transform",
+    "redpanda"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vectorizedio/wasm-api": ">=21.11.3-si-beta5",
-    "avro-js": ">=1.11.0"
+    "@vectorizedio/wasm-api": "21.12.1-wasm-beta1",
+    "avsc": "^5.7.3"
   },
   "devDependencies": {
-    "ts-loader": "8.0.4",
-    "webpack": "4.44.2",
-    "mocha": "8.1.3"
+    "mocha": "9.2.2",
+    "ts-loader": "9.2.8",
+    "webpack": "5.70.0"
   }
 }
