@@ -1,7 +1,7 @@
 version: '3'
 services:
   redpanda:
-    image: vectorized/redpanda:v21.11.11
+    image: vectorized/redpanda:latest
     command:
       - redpanda start
       - --set redpanda.enable_sasl=true
@@ -35,7 +35,7 @@ services:
       - admin
       - -p
       - rp123
-      - --sasl-mechanism
+      - --mechanism
       - 'SCRAM-SHA-256'
       - --api-urls redpanda:9644
     image: 'docker.vectorized.io/vectorized/redpanda:latest'
