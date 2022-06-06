@@ -38,7 +38,7 @@ services:
       - --mechanism
       - 'SCRAM-SHA-256'
       - --api-urls redpanda:9644
-    image: 'docker.vectorized.io/vectorized/redpanda:latest'
+    image: vectorized/redpanda:latest
     container_name: redpanda2
     restart: on-failure:4
     depends_on:
