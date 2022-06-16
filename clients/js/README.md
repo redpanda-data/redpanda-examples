@@ -4,24 +4,36 @@
 
 This app provides scripts for various client tasks.
 
-## Install dependencies
-
-```bash
-> npm i
-```
-
-More details on each script and its associated tasks are below.
-
 ## Start Redpanda
+
+You must have a Redpanda instance in order to use these apps.
+The following command starts a single broker on the default ports:
 
 ```bash
 > docker-compose -f docker-compose/compose-wasm.yaml up -d
 ```
 
-## producer.js
-
-The following command prints the help menu:
+## Install dependencies
 
 ```bash
-> node producer.js -h
+> cd clients/js
+> npm i
+```
+
+More details on each script and its associated tasks are below.
+
+## producer.js
+
+`producer.js` will send a stream of events into a topic.
+
+```bash
+> node producer -h
+```
+
+## registry.js
+
+`registry.js` allows managing the schema registry from a CLI.
+
+```bash
+> node registry -h
 ```

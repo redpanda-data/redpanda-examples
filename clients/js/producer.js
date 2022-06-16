@@ -44,27 +44,27 @@ const help = `
 
       Stream data from default file and output events to default topic on default broker:
 
-          > node producer.js
+          > node producer
 
       Stream data from data.csv and output to a topic named data on broker at brokerhost.dev port 19092:
 
-          > node producer.js -f data.csv -b brokerhost.dev:19092
+          > node producer -f data.csv -b brokerhost.dev:19092
 
       Read data from default file and output events to default topic on broker at localhost port 19092:
 
-          > node producer.js --brokers localhost:19092
+          > node producer --brokers localhost:19092
 
       Read data from default file into memory, reverse contents, and send events to default topic on broker at localhost port 19092:
 
-          > node producer.js -rb localhost:19092
+          > node producer -rb localhost:19092
 
       Read data from default file into memory, reverse contents, output ISO date string for Date prop:
 
-        > node producer.js --brokers localhost:19092 --reverse --date Date
+        > node producer --brokers localhost:19092 --reverse --date Date
 
       Same as above, but loop continuously and increment the date by one day on each event:
 
-        > node producer.js -lrb localhost:19092 -d Date
+        > node producer -lrb localhost:19092 -d Date
 `;
 
 if (args.help || args.h) {
@@ -72,7 +72,7 @@ if (args.help || args.h) {
   process.exit(0);
 }
 
-const brokers = (args.brokers || args.b || "localhost:9092").split(",");
+const brokers = (args.brokers || args.broker || args.b || "localhost:9092").split(",");
 const csvPath =
   args.csv || args.file || args.f || "../../spark/scala/src/main/resources/market_activity.csv";
 const topic =

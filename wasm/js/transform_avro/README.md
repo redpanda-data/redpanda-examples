@@ -82,7 +82,7 @@ Start the producer (in a third terminal):
 ```bash
 > cd clients/js
 > npm install
-> node producer.js -rd Date
+> node producer -rd Date
 ```
 
 The above command will output many lines of JSON string representations of the events being sent to topic `market_activity`.
