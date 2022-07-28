@@ -13,8 +13,9 @@ Submit any new and/or interesting examples with a pull request!
 
 | Client | Description |
 | - | - |
-| [Javascript](./clients/js/README.md) | produce events, upload schemas to registry |
-| [Python](./clients/python/README.md) | schema registry interaction, produce events, deserialize with Avro, etc. |
+| [Go](./clients/go) | Produce and Consume using [franz-go](https://github.com/twmb/franz-go) and [sarama](https://github.com/Shopify/sarama) |
+| [Javascript](./clients/js/README.md) | Produce events, upload schemas to registry |
+| [Python](./clients/python/README.md) | Produce and Consume events, and use the schema registry |
 
 ### Ebooks microservices payments
 
