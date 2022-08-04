@@ -30,3 +30,6 @@ metals.sbt
 dist/
 node_modules/
 package-lock.json
+
+# Go
+redpanda-franz-example
