@@ -1,0 +1,24 @@
+{
+  "type" : "record",
+  "name" : "nasdaq",
+  "fields" : [{
+      "name" : "date",
+      "type" : "string"
+    }, {
+      "name" : "close",
+      "type" : "string"
+    }, {
+      "name" : "volume",
+      "type" : "double"
+    }, {
+      "name" : "open",
+      "type" : "string"
+    }, {
+      "name" : "high",
+      "type" : "string"
+    }, {
+      "name" : "low",
+      "type" : "string"
+    }
+  ]
+}

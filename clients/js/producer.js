@@ -8,27 +8,29 @@ import { Kafka } from "kafkajs";
 
 let args = parseArgs(process.argv.slice(2));
 const help = `
-  ${chalk.red("producer.js")} - produce events to an event bus by reading data from csv file
+  ${chalk.red("producer.js")} - Read messages from a .csv file and send them to Redpanda.
 
   ${chalk.bold("USAGE")}
 
   > node producer.js --help
   > node producer.js [-f path_to_file] [-t topic_name] [-b host:port] [-d date_column_name] [-r] [-l]
 
-  By default the producer script will stream data from market_activity.csv and output events to topic market_activity.
+  By default this producer script will stream data from ../data/HistoricalData_COKE_5Y.csv and output
+  events to topic market_activity.
 
-  If either the loop or reverse arguments are given, file content is read into memory prior to sending events.
-  Don't use the loop/reverse arguments if the file size is large or your system memory capacity is low.
+  If either the loop or reverse arguments are given, file content is read into memory prior to 
+  sending events. Don't use the loop/reverse arguments if the file size is large or your system
+  memory capacity is low.
 
   ${chalk.bold("OPTIONS")}
 
       -h, --help                  Shows this help message
 
-      -f, --file, --csv           Reads from file and outputs events to a topic named after the file
-                                    default: ../../spark/scala/src/main/resources/market_activity.csv
+      -f, --file, --csv           Read csv-formatted messages from this file
+                                    default: ../data/HistoricalData_COKE_5Y.csv
 
       -t, --topic                 Topic where events are sent
-                                    default: market_activity
+                                    default: HistoricalData_COKE_5Y
 
       -b, --broker --brokers      Comma-separated list of the host and port for each broker
                                     default: localhost:9092
@@ -46,15 +48,16 @@ const help = `
 
           > node producer.js
 
-      Stream data from data.csv and output to a topic named data on broker at brokerhost.dev port 19092:
+      Stream data from data.csv and output to a topic named data on broker at localhost port 19092:
 
-          > node producer.js -f data.csv -b brokerhost.dev:19092
+          > node producer.js -f data.csv -t data -b localhost:19092
 
-      Read data from default file and output events to default topic on broker at localhost port 19092:
+      Read data from default file and output to default topic on broker at localhost port 19092:
 
           > node producer.js --brokers localhost:19092
 
-      Read data from default file into memory, reverse contents, and send events to default topic on broker at localhost port 19092:
+      Read data from default file into memory, reverse contents, and send events to default topic on
+      broker at localhost port 19092:
 
           > node producer.js -rb localhost:19092
 
@@ -74,9 +77,9 @@ if (args.help || args.h) {
 
 const brokers = (args.brokers || args.b || "localhost:9092").split(",");
 const csvPath =
-  args.csv || args.file || args.f || "../../spark/scala/src/main/resources/market_activity.csv";
+  args.csv || args.file || args.f || "../data/HistoricalData_COKE_5Y.csv";
 const topic =
-  args.topic || args.t || path.basename(csvPath, ".csv") || path.basename(csvPath, ".CSV");
+  args.topic || args.t || "market_activity";
 const dateProp = args.date || args.d;
 const isReverse = args.reverse || args.r;
 const isLoop = args.loop || args.l;
@@ -117,7 +120,9 @@ const run = async () => {
         row[dateProp] = new Date(row[dateProp]);
       }
       if (isLoop || isReverse) {
-        // set last date if we have a date prop, and either if 1) we are on the first entry while reversed or 2) not reversed
+        // Set last date if we have a date prop, and either if:
+        //   1) On the first entry while reversed, or 
+        //   2) Not reversed
         if (dateProp && ((isReverse && !lastDate) || !isReverse)) lastDate = row[dateProp];
         data.push(row);
       } else {
