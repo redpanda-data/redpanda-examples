@@ -1,7 +1,6 @@
-* @andrewhsu
 /clients @jrkinley
 /docker-compose @jrkinley
-/docs @coral-waters
+/docs @redpanda-data/documentation
 /ebooks @kminguez
 /partners @jrkinley
 /spark @jrkinley
