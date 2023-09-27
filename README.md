@@ -1,4 +1,4 @@
-[![Slack](https://img.shields.io/badge/Slack-Redpanda%20Community-blue)](https://redpanda.com/slack)
+:no_entry: [DEPRECATED] Active at https://github.com/redpanda-data/redpanda-labs
 
 # Redpanda Examples
 
