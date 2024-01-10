@@ -26,6 +26,9 @@ project/project/
 build.properties
 metals.sbt
 
+# Kubernetes
+kubernetes/gitops/flux-system/
+
 # Javascript
 dist/
 node_modules/
