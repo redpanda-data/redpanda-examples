@@ -122,11 +122,11 @@ NAME       AGE     READY   STATUS
 redpanda   3m23s   True    Helm install succeeded for release redpanda/redpanda.v1 with chart redpanda@5.7.5
 ----
 
-== Manage Updates
+== Manage updates
 
-To update Redpanda, modify the `HelmRelease` manifest in your Git repository.
+To update Redpanda, modify the `redpanda-helm-release.yaml` manifest in your Git repository. You can configure the Helm chart in the `spec.values` field. For a description of all available configurations, see the https://docs.redpanda.com/current/reference/k-redpanda-helm-spec/[Redpanda Helm Chart Specification].
 
-When changes are pushed, Flux will automatically apply these updates to your cluster.
+When you push changes to GitHub, Flux automatically applies the updates to your Kubernetes cluster.
 
 == Delete the cluster
 
