@@ -1,0 +1,81 @@
+= Deploy Redpanda in Kubernetes for GitOps
+
+GitOps is a modern approach to managing and automating the deployment and provisioning process using Git as the single source of truth. It involves storing configuration files and deployment scripts in a Git repository, and then using automation tools to continuously monitor the repository for changes.
+
+In this example, you will use Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster. Flux is a toolkit for GitOps with Kubernetes clusters that supports:
+
+- *Version control for configurations*: Allowing you to track changes, collaborate, and revert to previous configurations if needed.
+- *Drift detection and remediation*: Continuously monitoring the Redpanda cluster's state. If discrepancies are detected, Flux can automatically remediate them to bring the Redpanda cluster back to the desired state.
+- *Collaboration and auditing*: Multiple team members can propose changes to Redpanda configurations through Git pull requests, enabling code reviews and discussions before changes are applied.
+
+== Prerequisites
+
+You must have the following:
+
+- https://github.com/signup[A GitHub account].
+
+- https://fluxcd.io/flux/installation/#install-the-flux-cli[The Flux CLI]
+
+- At least version 1.24 of https://kubernetes.io/docs/tasks/tools/[the kubectl CLI].
++
+[,bash]
+----
+kubectl version --client
+----
+- At least version 3.6.0 of https://helm.sh/docs/intro/install/[Helm].
++
+[,bash]
+----
+helm version
+----
+
+- https://kind.sigs.k8s.io/docs/user/quick-start/#installation[kind]
+
+- https://docs.docker.com/get-docker/[Docker]
+
+== Run the example
+
+To run the example, you must fork the `redpanda-examples` repository and configure Flux to connect to your fork.
+
+. Fork the https://github.com/redpanda-data/redpanda-examples[`redpanda-data/redpanda-examples`] repository on GitHub.
+
+. Bootstrap Flux for your forked repository.
++
+[NOTE]
+====
+Make sure to do the following:
+
+- Provide Flux with your https://fluxcd.io/flux/installation/bootstrap/github/#github-pat[GitHub personal access token (PAT)].
+- Configure the `path` flag with the value `kubernetes/gitops`. This is the path where the example manifests are stored in the repository.
+====
++
+Here is an example of the bootstrap command:
++
+[,bash]
+----
+flux bootstrap github \
+  --token-auth \
+  --owner=<github-username> \
+  --repository=redpanda-examples \
+  --branch=main \
+  --path=./kubernetes/gitops \
+  --personal
+----
++
+Replace `<github-username>` with your GitHub username.
+
+The bootstrap script does the following:
+
+. Creates a deploy token and saves it as a Kubernetes Secret.
+. Creates an empty GitHub project, if the project specified by `--repository` doesn't exist.
+. Generates Flux definition files for your project.
+. Commits the definition files to the specified branch.
+. Applies the definition files to your cluster.
+. Applies the manifests in `kubernetes/gitops` which deploy Redpanda and cert-manager.
+
+After you run the script, Flux will be ready to manage itself and any other resources you add to the GitHub project at the specified path.
+
+== Verify the deployment
+
+== Uninstall the deployment
+

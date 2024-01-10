@@ -2,7 +2,7 @@
 
 # Redpanda Examples
 
-A collection of examples to demonstrate how to interact with Redpanda from various clients and languages. Redpanda is Kafka API compatible. Any client that works with Kafka will work, but we have tested the ones listed [here](https://docs.redpanda.com/docs/reference/faq/#what-clients-do-you-recommend-to-use-with-redpanda).
+A collection of examples to demonstrate how to interact with Redpanda from various clients and languages. Redpanda is Kafka API compatible. Redpanda is compatible with Apache Kafka versions 0.11 and later, with specific exceptions noted on [this page](https://docs.redpanda.com/current/develop/kafka-clients/).
 
 ## Directory
 
@@ -19,8 +19,10 @@ Submit any new and/or interesting examples with a pull request!
 
 ### Ebooks microservices payments
 
-The Ebooks folder contains a Java app built with [Quarkus](https://quarkus.io/), which is a popular Java framework that uses Redpanda to power its Kafka dev service (see [this article](https://quarkus.io/guides/kafka-dev-services) for more details).
+The Ebooks directory contains a Java app built with [Quarkus](https://quarkus.io/), which is a popular Java framework that uses Redpanda to power its Kafka dev service (see [this article](https://quarkus.io/guides/kafka-dev-services) for more details).
 The Ebooks app implements a consumer which validates payments.
+
+### Kubernetes
 
 ### Spark
 
@@ -41,7 +43,7 @@ Below is a sample of some of our partner integrations.
 
 #### Deephaven
 
-[Deephaven](https://deephaven.io/) is an open-core query engine for building apps and analytics with real-time streams and batch data.  
+[Deephaven](https://deephaven.io/) is an open-core query engine for building apps and analytics with real-time streams and batch data.
 
 ##### Redpanda + Deephaven Demo
 
@@ -54,4 +56,4 @@ Need to monitor your local machine in real time?  This example publishes your `d
 
 ##### Stock Market
 
-Want to monitor updating stock market data?  Or see how to publish multiple topics to Redpanda?  This example creates tables to see stocks from [dxFeed](https://dxfeed.com/). See full example here: [deephaven-examples/redpanda-dxfeed-financial-data](https://github.com/deephaven-examples/redpanda-dxfeed-financial-data).
+Want to monitor updating stock market data? Or see how to publish multiple topics to Redpanda?  This example creates tables to see stocks from [dxFeed](https://dxfeed.com/). See full example here: [deephaven-examples/redpanda-dxfeed-financial-data](https://github.com/deephaven-examples/redpanda-dxfeed-financial-data).

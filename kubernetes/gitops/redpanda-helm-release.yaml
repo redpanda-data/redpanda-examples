@@ -4,6 +4,9 @@ metadata:
   name: redpanda
   namespace: redpanda
 spec:
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
   interval: 5m
   chart:
     spec:
