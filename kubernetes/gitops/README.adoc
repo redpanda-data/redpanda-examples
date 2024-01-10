@@ -19,6 +19,8 @@ You must have the following:
 
 - https://fluxcd.io/flux/installation/#install-the-flux-cli[The Flux CLI]
 
+- An understanding of the https://fluxcd.io/flux/concepts/[core concepts of Flux].
+
 - At least version 1.24 of https://kubernetes.io/docs/tasks/tools/[the kubectl CLI].
 +
 [,bash]
