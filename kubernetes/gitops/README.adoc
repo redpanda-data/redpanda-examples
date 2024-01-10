@@ -1,4 +1,7 @@
-= Deploy Redpanda in Kubernetes for GitOps
+= Set Up GitOps for the Redpanda Helm Chart
+:description: In this example, you will use Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster.
+:page-interactive-example: https://play.instruqt.com/manage/redpanda/tracks/redpanda-k8s-gitops
+:page-category: Deployment, GitOps
 
 GitOps is a modern approach to managing and automating the deployment and provisioning process using Git as the single source of truth. It involves storing configuration files and deployment scripts in a Git repository, and then using automation tools to continuously monitor the repository for changes.
 
@@ -32,6 +35,31 @@ helm version
 - https://kind.sigs.k8s.io/docs/user/quick-start/#installation[kind]
 
 - https://docs.docker.com/get-docker/[Docker]
+
+== Create a local Kubernetes cluster
+
+In this step, you create one master and three worker nodes (one worker node for each Redpanda broker).
+
+. Define a cluster in the `kind.yaml` configuration file:
++
+```bash
+cat <<EOF >kind.yaml
+---
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+EOF
+```
+
+. Create the Kubernetes cluster from the configuration file:
++
+```bash
+kind create cluster --config kind.yaml
+```
 
 == Run the example
 
@@ -77,5 +105,36 @@ After you run the script, Flux will be ready to manage itself and any other reso
 
 == Verify the deployment
 
-== Uninstall the deployment
+To verify that the deployment was successful, check the status of the HelmRelease resource:
 
+[,bash]
+----
+kubectl get helmrelease redpanda --namespace redpanda --watch
+----
+
+In a few minutes, you should see that the Helm install succeeded:
+
+[.no-copy]
+----
+NAME       AGE     READY   STATUS
+redpanda   3m23s   True    Helm install succeeded for release redpanda/redpanda.v1 with chart redpanda@5.7.5
+----
+
+== Manage Updates
+
+To update Redpanda, modify the `HelmRelease` manifest in your Git repository.
+
+When changes are pushed, Flux will automatically apply these updates to your cluster.
+
+== Delete the cluster
+
+To delete the Kubernetes cluster as well as all the Docker resources that kind created, run:
+
+[,bash]
+----
+kind delete cluster
+----
+
+== Suggested reading
+
+See the {page-interactive-example}[interactive examples] for setting up GitOps with the Redpanda Operator.

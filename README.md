@@ -19,10 +19,12 @@ Submit any new and/or interesting examples with a pull request!
 
 ### Ebooks microservices payments
 
-The Ebooks directory contains a Java app built with [Quarkus](https://quarkus.io/), which is a popular Java framework that uses Redpanda to power its Kafka dev service (see [this article](https://quarkus.io/guides/kafka-dev-services) for more details).
+The `ebooks/` directory contains a Java app built with [Quarkus](https://quarkus.io/), which is a popular Java framework that uses Redpanda to power its Kafka dev service (see [this article](https://quarkus.io/guides/kafka-dev-services) for more details).
 The Ebooks app implements a consumer which validates payments.
 
 ### Kubernetes
+
+The `kubernetes/` directory contains examples you can run in a Kubernetes environment.
 
 ### Spark
 
