@@ -2,7 +2,7 @@
 
 # Redpanda Examples
 
-A collection of examples to demonstrate how to use Redpanda to accomplish goals using various clients, languages, and deployment environments. Redpanda is Kafka API compatible. Redpanda is compatible with Apache Kafka versions 0.11 and later, with specific exceptions noted on [this page](https://docs.redpanda.com/current/develop/kafka-clients/).
+A collection of examples to demonstrate how to use Redpanda with various clients, languages, and deployment environments. Redpanda is compatible with Apache Kafka versions 0.11 and later, with specific exceptions noted on [this page](https://docs.redpanda.com/current/develop/kafka-clients/).
 
 ## Directory
 

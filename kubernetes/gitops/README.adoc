@@ -1,14 +1,14 @@
 = Set Up GitOps for the Redpanda Helm Chart
-:description: In this example, you will use Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster.
+:description: This example uses Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster.
 :page-interactive-example: https://play.instruqt.com/manage/redpanda/tracks/redpanda-k8s-gitops
 :page-category: Deployment, GitOps
 
 GitOps is a modern approach to managing and automating the deployment and provisioning process using Git as the single source of truth. It involves storing configuration files and deployment scripts in a Git repository, and then using automation tools to continuously monitor the repository for changes.
 
-In this example, you will use Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster. Flux is a toolkit for GitOps with Kubernetes clusters that supports:
+This example uses Flux to deploy the Redpanda Helm chart on a local Kubernetes cluster. Flux is a toolkit for GitOps with Kubernetes clusters that supports the following:
 
-- *Version control for configurations*: Allowing you to track changes, collaborate, and revert to previous configurations if needed.
-- *Drift detection and remediation*: Continuously monitoring the Redpanda cluster's state. If discrepancies are detected, Flux can automatically remediate them to bring the Redpanda cluster back to the desired state.
+- *Version control for configurations*: You can track changes, collaborate, and revert to previous configurations if needed.
+- *Drift detection and remediation*: Flux continuously monitors the Redpanda cluster's state. If discrepancies are detected, Flux automatically remediates them to bring the Redpanda cluster back to the desired state.
 - *Collaboration and auditing*: Multiple team members can propose changes to Redpanda configurations through Git pull requests, enabling code reviews and discussions before changes are applied.
 
 == Prerequisites
@@ -40,7 +40,7 @@ helm version
 
 == Create a local Kubernetes cluster
 
-In this step, you create one master and three worker nodes (one worker node for each Redpanda broker).
+Create one master and three worker nodes (one worker node for each Redpanda broker).
 
 . Define a cluster in the `kind.yaml` configuration file:
 +
@@ -65,7 +65,7 @@ kind create cluster --config kind.yaml
 
 == Run the example
 
-To run the example, you must fork the `redpanda-examples` repository and configure Flux to connect to your fork.
+Fork the `redpanda-examples` repository, and configure Flux to connect to your fork.
 
 . Fork the https://github.com/redpanda-data/redpanda-examples[`redpanda-data/redpanda-examples`] repository on GitHub.
 
@@ -96,14 +96,14 @@ Replace `<github-username>` with your GitHub username.
 
 The bootstrap script does the following:
 
-. Creates a deploy token and saves it as a Kubernetes Secret.
-. Creates an empty GitHub project, if the project specified by `--repository` doesn't exist.
-. Generates Flux definition files for your project.
-. Commits the definition files to the specified branch.
-. Applies the definition files to your cluster.
-. Applies the manifests in `kubernetes/gitops` which deploy Redpanda and cert-manager.
+. Creates a deploy token and saves it as a Kubernetes Secret
+. Creates an empty GitHub project, if the project specified by `--repository` doesn't exist
+. Generates Flux definition files for your project
+. Commits the definition files to the specified branch
+. Applies the definition files to your cluster
+. Applies the manifests in `kubernetes/gitops` which deploy Redpanda and cert-manager
 
-After you run the script, Flux will be ready to manage itself and any other resources you add to the GitHub project at the specified path.
+After you run the script, Flux is ready to manage itself and any other resources you add to the GitHub project at the specified path.
 
 == Verify the deployment
 
