@@ -1,0 +1,236 @@
+---
+version: "3.7"
+name: redpanda-quickstart
+
+networks:
+  redpanda_network:
+volumes:
+  redpanda-0: null
+  redpanda-1: null
+  redpanda-2: null
+  redpanda-3: null
+  redpanda-4: null
+services:
+  redpanda-0:
+    command:
+      # defaults necessary for each redpanda container instance
+      - redpanda
+      - start
+      - --overprovisioned
+      - --reserve-memory 0M
+      - --set redpanda.auto_create_topics_enabled=false
+      - --set redpanda.empty_seed_starts_cluster=false
+      - --kafka-addr INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --pandaproxy-addr INSIDE://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --schema-registry-addr INSIDE://0.0.0.0:8081,OUTSIDE://0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
+      - --smp 1
+      - --memory 1G
+      - --default-log-level=${LOG_LEVEL:-info}
+      #
+      # seeds list should be the same across all nodes
+      #
+      - --seeds ${SEEDS:-redpanda-0:33145,redpanda-1:33145,redpanda-2:33145}
+      # modify these if you're attempting to change any of the exposed ports.
+      # these are used by the host/bridge port to container mapping.
+      - --advertise-kafka-addr INSIDE://redpanda-0:29092,OUTSIDE://localhost:10092
+      - --advertise-pandaproxy-addr INSIDE://redpanda-0:28082,OUTSIDE://localhost:10082
+      - --advertise-rpc-addr redpanda-0:33145
+    image: docker.redpanda.com/vectorized/redpanda:${RP_VERSION:-latest}
+    container_name: redpanda-0
+    volumes:
+      - redpanda-0:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
+    ports:
+      - 10081:8081 # schema registry
+      - 10082:8082 # panda proxy
+      - 10092:9092 # kafka client service
+      - 10644:9644 # redpanda admin
+    profiles:
+      - onenode
+      - threenode
+      - fournode
+      - fivenode
+  redpanda-1:
+    command:
+      # defaults necessary for each redpanda container instance
+      - redpanda
+      - start
+      - --overprovisioned
+      - --reserve-memory 0M
+      - --set redpanda.auto_create_topics_enabled=false
+      - --set redpanda.empty_seed_starts_cluster=false
+      - --kafka-addr INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --pandaproxy-addr INSIDE://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --schema-registry-addr INSIDE://0.0.0.0:8081,OUTSIDE://0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
+      - --smp 1
+      - --memory 1G
+      - --default-log-level=${LOG_LEVEL:-info}
+      #
+      # seeds list should be the same across all nodes
+      #
+      - --seeds ${SEEDS:-redpanda-0:33145,redpanda-1:33145,redpanda-2:33145}
+      # modify these if you're attempting to change any of the exposed ports.
+      # these are used by the host/bridge port to container mapping.
+      - --advertise-kafka-addr INSIDE://redpanda-1:29092,OUTSIDE://localhost:11092
+      - --advertise-pandaproxy-addr INSIDE://redpanda-1:28082,OUTSIDE://localhost:11082
+      - --advertise-rpc-addr redpanda-1:33145
+    image: docker.redpanda.com/vectorized/redpanda:${RP_VERSION:-latest}
+    container_name: redpanda-1
+    volumes:
+      - redpanda-1:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
+    ports:
+      - 11081:8081 # schema registry
+      - 11082:8082 # panda proxy
+      - 11092:9092 # kafka client service
+      - 11644:9644 # redpanda admin
+    profiles:
+      - threenode
+      - fournode
+      - fivenode
+  redpanda-2:
+    command:
+      # defaults necessary for each redpanda container instance
+      - redpanda
+      - start
+      - --overprovisioned
+      - --reserve-memory 0M
+      - --set redpanda.auto_create_topics_enabled=false
+      - --set redpanda.empty_seed_starts_cluster=false
+      - --kafka-addr INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --pandaproxy-addr INSIDE://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --schema-registry-addr INSIDE://0.0.0.0:8081,OUTSIDE://0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
+      - --smp 1
+      - --memory 1G
+      - --default-log-level=${LOG_LEVEL:-info}
+      #
+      # seeds list should be the same across all nodes
+      #
+      - --seeds ${SEEDS:-redpanda-0:33145,redpanda-1:33145,redpanda-2:33145}
+      # modify these if you're attempting to change any of the exposed ports.
+      # these are used by the host/bridge port to container mapping.
+      - --advertise-kafka-addr INSIDE://redpanda-2:29092,OUTSIDE://localhost:12092
+      - --advertise-pandaproxy-addr INSIDE://redpanda-2:28082,OUTSIDE://localhost:12082
+      - --advertise-rpc-addr redpanda-2:33145
+    image: docker.redpanda.com/vectorized/redpanda:${RP_VERSION:-latest}
+    container_name: redpanda-2
+    volumes:
+      - redpanda-2:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
+    ports:
+      - 12081:8081 # schema registry
+      - 12082:8082 # panda proxy
+      - 12092:9092 # kafka client service
+      - 12644:9644 # redpanda admin
+    profiles:
+      - threenode
+      - fournode
+      - fivenode
+  redpanda-3:
+    command:
+      # defaults necessary for each redpanda container instance
+      - redpanda
+      - start
+      - --overprovisioned
+      - --reserve-memory 0M
+      - --set redpanda.auto_create_topics_enabled=false
+      - --set redpanda.empty_seed_starts_cluster=false
+      - --kafka-addr INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --pandaproxy-addr INSIDE://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --schema-registry-addr INSIDE://0.0.0.0:8081,OUTSIDE://0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
+      - --smp 1
+      - --memory 1G
+      - --default-log-level=${LOG_LEVEL:-info}
+      #
+      # seeds list should be the same across all nodes
+      #
+      - --seeds ${SEEDS:-redpanda-0:33145,redpanda-1:33145,redpanda-2:33145}
+      # modify these if you're attempting to change any of the exposed ports.
+      # these are used by the host/bridge port to container mapping.
+      - --advertise-kafka-addr INSIDE://redpanda-3:29092,OUTSIDE://localhost:13092
+      - --advertise-pandaproxy-addr INSIDE://redpanda-3:28082,OUTSIDE://localhost:13082
+      - --advertise-rpc-addr redpanda-3:33145
+    image: docker.redpanda.com/vectorized/redpanda:${RP_VERSION:-latest}
+    container_name: redpanda-3
+    volumes:
+      - redpanda-3:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
+    ports:
+      - 13081:8081 # schema registry
+      - 13082:8082 # panda proxy
+      - 13092:9092 # kafka client service
+      - 13644:9644 # redpanda admin
+    profiles:
+      - fournode
+      - fivenode
+  redpanda-4:
+    command:
+      # defaults necessary for each redpanda container instance
+      - redpanda
+      - start
+      - --overprovisioned
+      - --reserve-memory 0M
+      - --set redpanda.auto_create_topics_enabled=false
+      - --set redpanda.empty_seed_starts_cluster=false
+      - --kafka-addr INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --pandaproxy-addr INSIDE://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --schema-registry-addr INSIDE://0.0.0.0:8081,OUTSIDE://0.0.0.0:18081
+      - --rpc-addr 0.0.0.0:33145
+      - --smp 1
+      - --memory 1G
+      - --default-log-level=${LOG_LEVEL:-info}
+      #
+      # seeds list should be the same across all nodes
+      #
+      - --seeds ${SEEDS:-redpanda-0:33145,redpanda-1:33145,redpanda-2:33145}
+      # modify these if you're attempting to change any of the exposed ports.
+      # these are used by the host/bridge port to container mapping.
+      - --advertise-kafka-addr INSIDE://redpanda-4:29092,OUTSIDE://localhost:12092
+      - --advertise-pandaproxy-addr INSIDE://redpanda-4:28082,OUTSIDE://localhost:12082
+      - --advertise-rpc-addr redpanda-4:33145
+    image: docker.redpanda.com/vectorized/redpanda:${RP_VERSION:-latest}
+    container_name: redpanda-4
+    volumes:
+      - redpanda-4:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
+    ports:
+      - 14081:8081 # schema registry
+      - 14082:8082 # panda proxy
+      - 14092:9092 # kafka client service
+      - 14644:9644 # redpanda admin
+    profiles:
+      - fivenode
+  console:
+    container_name: redpanda-console
+    image: docker.redpanda.com/vectorized/console:${RP_CONSOLE_VERSION:-latest}
+    networks:
+      - redpanda_network
+    entrypoint: /bin/sh
+    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda-0:29092", "redpanda-1:29092", "redpanda-2:29092"]
+          schemaRegistry:
+            enabled: true
+            urls: ["http://redpanda-0:8081"]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda-0:9644"]
+    ports:
+      - 8080:8080
+    depends_on:
+      - redpanda-0
+      - redpanda-1
+      - redpanda-2
